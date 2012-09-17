@@ -77,7 +77,7 @@ TOMCAT_SECURITY=no
 # It also looks like the default heap size of 64M is not enough for most cases
 # so the maximum heap size is set to 128M
 if [ -z "$JAVA_OPTS" ]; then
-        JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize=256m -Xmx512m"
+        JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize=256m -Xmx1024m"
 fi
 
 # End of variables that can be overwritten in $DEFAULT
