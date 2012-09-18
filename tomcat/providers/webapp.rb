@@ -51,7 +51,6 @@ action :create do
     not_if "test #{instance_war} -ef #{instance_dir}/webapps/#{instance_name}.war"
     notifies :stop, "service[tomcat-#{instance_name}]"
     notifies :delete, "directory[#{instance_dir}/webapps/#{instance_name}]"
-    notifies :start, "service[tomcat-#{instance_name}]"
   end
   
   service "tomcat-#{instance_name}" do
