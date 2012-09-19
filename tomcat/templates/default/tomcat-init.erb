@@ -25,7 +25,7 @@ NAME=tomcat-<%= @instance_name %>
 DESC="Tomcat servlet engine"
 DEFAULT=/etc/default/$NAME
 JVM_TMP=<%= @instance_dir %>/temp
-JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-amd64"
+JAVA_HOME="<%= @jdk_home %>"
 
 if [ `id -u` -ne 0 ]; then
         echo "You need root privileges to run this script"

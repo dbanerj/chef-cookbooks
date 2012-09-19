@@ -5,5 +5,6 @@ attribute :user, :kind_of => String
 attribute :group, :kind_of => String
 attribute :http_port, :kind_of => Integer
 attribute :control_port, :kind_of => Integer
+attribute :jdk_home, :kind_of => String
 
 attribute :war, :kind_of => String

@@ -3,7 +3,9 @@ action :create do
   instance_name = new_resource.name
   instance_user = new_resource.user || new_resource.name
   instance_group = new_resource.group || new_resource.name
-  
+
+  jdk_home = new_resource.jdk_home || "/usr/lib/jvm/java-1.7.0-openjdk-amd64"
+
   instance_war = "#{node[:tomcat][:applications_dir]}/#{new_resource.war}"
   
   execute 'create Tomcat instance' do
@@ -43,6 +45,7 @@ action :create do
       :instance_dir => instance_dir,
       :instance_user => instance_user,
       :instance_group => instance_group,
+      :jdk_home => jdk_home,
     })
   end
 
