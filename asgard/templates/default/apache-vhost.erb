@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+ServerName <%= @params[:server_name] %>
+<% @params[:server_aliases].each do |a| -%>
+    ServerAlias <%= "#{a}" %>
+<% end -%>
+
+    RewriteEngine On
+
+    DocumentRoot /var/www
+
+    LogLevel info
+    ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
+    CustomLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
+
+    ProxyRequests     Off
+    ProxyPreserveHost On
+
+    <Proxy http://localhost:8080/asgard*>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    ProxyPass         /asgard  http://localhost:8080/asgard retry=0
+    ProxyPassReverse  /asgard  http://localhost:8080/asgard
+    ProxyPassReverse  /asgard  http://<%= @params[:server_name] %>/asgard
+</VirtualHost>
+

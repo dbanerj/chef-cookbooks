@@ -3,8 +3,6 @@
 #
 # Copyright 2012, Innovation District B.V.
 #
-# All rights reserved - Do Not Redistribute
-#
 package "tomcat7-user" do
   action  :install
 end
