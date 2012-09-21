@@ -27,6 +27,7 @@ action :create do
     system  true
     home    "/home/#{instance_user}"
     gid     instance_group
+    shell   "/bin/bash"
     supports  :manage_home => true
   end
   
