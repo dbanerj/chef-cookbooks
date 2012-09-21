@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # /etc/init.d/tomcat-confluence -- startup script for the Tomcat 7 servlet engine
 #
@@ -61,6 +61,12 @@ for jdir in $JDK_DIRS; do
     fi
 done
 export JAVA_HOME
+
+# Export any Cloud variables made available by Asgard
+USER_DATA_FILE="/var/lib/cloud/instance/user-data.txt"
+if [ -e $USER_DATA_FILE ]; then
+    source $USER_DATA_FILE
+fi
 
 # Directory where the Tomcat binary distribution resides
 CATALINA_HOME="/usr/share/tomcat7"
