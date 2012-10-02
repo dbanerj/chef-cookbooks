@@ -66,6 +66,7 @@ export JAVA_HOME
 USER_DATA_FILE="/var/lib/cloud/instance/user-data.txt"
 if [ -e $USER_DATA_FILE ]; then
     source $USER_DATA_FILE
+    export RAILS_ENV=$CLOUD_STACK
 fi
 
 # Directory where the Tomcat binary distribution resides
