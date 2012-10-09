@@ -7,17 +7,17 @@ action :create do
   jdk_home = new_resource.jdk_home || "/usr/lib/jvm/java-1.7.0-openjdk-amd64"
 
   instance_war = "#{node[:tomcat][:applications_dir]}/#{new_resource.war}"
-  
+
   execute 'create Tomcat instance' do
     creates instance_dir
     command "tomcat7-instance-create -p #{new_resource.http_port} -c #{new_resource.control_port} #{instance_dir}"
   end
-  
+
   directory "#{instance_dir}/webapps/#{instance_name}" do
     action :nothing
     recursive true
   end
-  
+
   service "tomcat-#{instance_name}" do
     action :nothing
   end
@@ -30,11 +30,26 @@ action :create do
     shell   "/bin/bash"
     supports  :manage_home => true
   end
-  
+
   execute "chown -R #{instance_user}:#{instance_group} #{instance_dir}" do
     not_if "stat -c %U #{instance_dir}/webapps | grep #{instance_user}"
   end
-    
+
+  template "#{instance_dir}/conf/server.xml" do
+    source "server.xml.erb"
+    cookbook "tomcat"
+    mode 0644
+    owner instance_user
+    group instance_group
+    variables({
+      :http_port => new_resource.http_port,
+      :control_port => new_resource.control_port,
+      :secure => new_resource.secure,
+      :scheme => new_resource.scheme,
+      :proxy_port => new_resource.proxy_port
+    })
+  end
+
   template "/etc/init.d/tomcat-#{instance_name}" do
     source "tomcat-init.erb"
     cookbook "tomcat"
@@ -56,16 +71,15 @@ action :create do
     notifies :stop, "service[tomcat-#{instance_name}]"
     notifies :delete, "directory[#{instance_dir}/webapps/#{instance_name}]"
   end
-  
+
   service "tomcat-#{instance_name}" do
     action  :enable
     supports :restart => true, :reload => true, :status => true
   end
-  
+
   lib_dir  = "#{instance_dir}/lib"
   directory lib_dir do
     action :create
   end
-  
-  
+
 end
