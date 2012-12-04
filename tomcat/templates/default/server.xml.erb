@@ -43,8 +43,9 @@
          Define a non-SSL HTTP/1.1 Connector on port 8080
     -->
     <Connector port="<%= @http_port %>" protocol="HTTP/1.1"
-               secure="<%= @secure %>" scheme="<%= @scheme %>"
-               proxyPort="<%= @proxy_port %>"
+               <% if @secure %>secure="<%= @secure %>"<% end %>
+               <% if @scheme %>scheme="<%= @scheme %>"<% end %>
+               <% if @proxy_port %>proxyPort="<%= @proxy_port %>"<% end %>
                connectionTimeout="20000"
                URIEncoding="UTF-8"
                redirectPort="8443" />
