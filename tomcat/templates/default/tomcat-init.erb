@@ -83,9 +83,9 @@ TOMCAT_SECURITY=no
 # It also looks like the default heap size of 64M is not enough for most cases
 # so the maximum heap size is set to 128M
 if [ -z "$JAVA_OPTS" ]; then
-    JAVA_OPTS="-Djava.awt.headless=true"
-    if [ $CLOUD_STACK == "nightly" ]; then
-        JAVA_OPTS="$JAVA_OPTS <%= @java_opts_nightly %>"
+    JAVA_OPTS="-Djava.awt.headless=true <%= @java_opts %>"
+    if [ $CLOUD_STACK == "test" ]; then
+        JAVA_OPTS="$JAVA_OPTS <%= @java_opts_test %>"
     elif [ $CLOUD_STACK == "acc" ]; then
         JAVA_OPTS="$JAVA_OPTS <%= @java_opts_acc %>"
     elif [ $CLOUD_STACK == "prod" ]; then

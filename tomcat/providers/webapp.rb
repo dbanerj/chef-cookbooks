@@ -62,7 +62,8 @@ action :create do
       :instance_user => instance_user,
       :instance_group => instance_group,
       :jdk_home => jdk_home,
-      :java_opts_nightly => new_resource.java_opts_nightly,
+      :java_opts => new_resource.java_opts,
+      :java_opts_test => new_resource.java_opts_test,
       :java_opts_acc => new_resource.java_opts_acc,
       :java_opts_prod => new_resource.java_opts_prod
     })
