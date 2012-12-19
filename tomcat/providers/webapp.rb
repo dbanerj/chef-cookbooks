@@ -8,15 +8,15 @@ action :create do
 
   instance_war = "#{node[:tomcat][:applications_dir]}/#{new_resource.war}"
 
-  execute 'create Tomcat instance' do
-    template "/usr/local/bin/apache-tomcat7-instance-create.sh" do
-      source  "apache-tomcat7-instance-create.sh.erb"
-      cookbook "tomcat"
-      mode    0755
-      owner "root"
-      group "root"
-    end
+  template "/usr/local/bin/apache-tomcat7-instance-create.sh" do
+    source  "apache-tomcat7-instance-create.sh.erb"
+    cookbook "tomcat"
+    mode    0755
+    owner "root"
+    group "root"
+  end
 
+  execute 'create Tomcat instance' do
     creates instance_dir
     command "apache-tomcat7-instance-create -p #{new_resource.http_port} -c #{new_resource.control_port} #{instance_dir}"
   end
