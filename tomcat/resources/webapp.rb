@@ -12,7 +12,10 @@ attribute :jdk_home, :kind_of => String
 
 attribute :war, :kind_of => String
 
+# General JAVA_OPTS
+attribute :java_opts, :kind_of => String
+
 # Default memory settings per environment
-attribute :java_opts_nightly, :kind_of => String, :default => "-XX:MaxPermSize=128m -Xmx512m"
+attribute :java_opts_test, :kind_of => String, :default => "-XX:MaxPermSize=128m -Xmx512m"
 attribute :java_opts_acc, :kind_of => String, :default => "-XX:MaxPermSize=256m -Xmx1024m"
 attribute :java_opts_prod, :kind_of => String, :default => "-XX:MaxPermSize=256m -Xmx2048m"

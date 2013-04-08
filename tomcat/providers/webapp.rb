@@ -8,9 +8,17 @@ action :create do
 
   instance_war = "#{node[:tomcat][:applications_dir]}/#{new_resource.war}"
 
+  template "/usr/local/bin/apache-tomcat7-instance-create" do
+    source  "apache-tomcat7-instance-create.erb"
+    cookbook "tomcat"
+    mode    0755
+    owner "root"
+    group "root"
+  end
+
   execute 'create Tomcat instance' do
     creates instance_dir
-    command "tomcat7-instance-create -p #{new_resource.http_port} -c #{new_resource.control_port} #{instance_dir}"
+    command "apache-tomcat7-instance-create -p #{new_resource.http_port} -c #{new_resource.control_port} #{instance_dir}"
   end
 
   directory "#{instance_dir}/webapps/#{instance_name}" do
@@ -62,7 +70,8 @@ action :create do
       :instance_user => instance_user,
       :instance_group => instance_group,
       :jdk_home => jdk_home,
-      :java_opts_nightly => new_resource.java_opts_nightly,
+      :java_opts => new_resource.java_opts,
+      :java_opts_test => new_resource.java_opts_test,
       :java_opts_acc => new_resource.java_opts_acc,
       :java_opts_prod => new_resource.java_opts_prod
     })
