@@ -54,7 +54,8 @@ action :create do
       :control_port => new_resource.control_port,
       :secure => new_resource.secure,
       :scheme => new_resource.scheme,
-      :proxy_port => new_resource.proxy_port
+      :proxy_port => new_resource.proxy_port,
+      :proxy_name => new_resource.proxy_name
     })
   end
 
