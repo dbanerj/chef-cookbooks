@@ -134,16 +134,17 @@ then
   exit 1
 fi
 
-tar xf apache-tomcat-${TVERSION}.tar.gz
-rm -rf apache-tomcat-${TVERSION}/webapps
-rm -rf apache-tomcat-${TVERSION}/bin/*.bat
-chown -R root:root "apache-tomcat-${TVERSION}"
-
-if [ -d /usr/share/apache-tomcat7 ];
+if [ ! -d /usr/share/apache-tomcat7 ];
 then
-  rm -rf /usr/share/apache-tomcat7
+  cd /tmp
+
+  tar xf apache-tomcat-${TVERSION}.tar.gz
+  rm -rf apache-tomcat-${TVERSION}/webapps
+  rm -rf apache-tomcat-${TVERSION}/bin/*.bat
+  chown -R root:root "apache-tomcat-${TVERSION}"
+
+  mv "apache-tomcat-${TVERSION}" /usr/share/apache-tomcat7
 fi
-mv "apache-tomcat-${TVERSION}" /usr/share/apache-tomcat7
 
 cd /usr/share/apache-tomcat7
 
