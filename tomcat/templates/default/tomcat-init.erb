@@ -84,11 +84,11 @@ TOMCAT_SECURITY=no
 # so the maximum heap size is set to 128M
 if [ -z "$JAVA_OPTS" ]; then
     JAVA_OPTS="-Djava.awt.headless=true <%= @java_opts %>"
-    if [ $CLOUD_STACK == "test" ]; then
+    if [ "$CLOUD_STACK" == "test" ]; then
         JAVA_OPTS="$JAVA_OPTS <%= @java_opts_test %>"
-    elif [ $CLOUD_STACK == "acc" ]; then
+    elif [ "$CLOUD_STACK" == "acc" ]; then
         JAVA_OPTS="$JAVA_OPTS <%= @java_opts_acc %>"
-    elif [ $CLOUD_STACK == "prod" ]; then
+    elif [ "$CLOUD_STACK" == "prod" ]; then
         JAVA_OPTS="$JAVA_OPTS <%= @java_opts_prod %>"
     else
         JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=256m -Xmx1024m"
