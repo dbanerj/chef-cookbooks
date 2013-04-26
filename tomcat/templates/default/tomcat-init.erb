@@ -198,47 +198,6 @@ start)
             }
             chown $TOMCAT_USER "$JVM_TMP"
 
-            catalina_sh start $SECURITY
-            sleep 5
-            if start-stop-daemon --test --start --pidfile "$CATALINA_PID" \
-                    --user $TOMCAT_USER --exec "$JAVA_HOME/bin/java" \
-                    >/dev/null; then
-                    if [ -f "$CATALINA_PID" ]; then
-                            rm -f "$CATALINA_PID"
-                    fi
-                    log_end_msg 1
-            else
-                    log_end_msg 0
-            fi
-    else
-            log_progress_msg "(already running)"
-            log_end_msg 0
-    fi
-   ;;
-start-monitor)
-    if [ -z "$JAVA_HOME" ]; then
-            log_failure_msg "no JDK found - please set JAVA_HOME"
-            exit 1
-    fi
-
-    if [ ! -d "$CATALINA_BASE/conf" ]; then
-            log_failure_msg "invalid CATALINA_BASE: $CATALINA_BASE"
-            exit 1
-    fi
-
-    log_daemon_msg "Starting $DESC" "$NAME"
-    if start-stop-daemon --test --start --pidfile "$CATALINA_PID" \
-            --user $TOMCAT_USER --exec "$JAVA_HOME/bin/java" \
-            >/dev/null; then
-
-            # Remove / recreate JVM_TMP directory
-            rm -rf "$JVM_TMP"
-            mkdir -p "$JVM_TMP" || {
-                    log_failure_msg "could not create JVM temporary directory"
-                    exit 1
-            }
-            chown $TOMCAT_USER "$JVM_TMP"
-
             CATALINA_OPTS="$CATALINA_OPTS $MONITORING_OPTS"
 
             catalina_sh start $SECURITY
