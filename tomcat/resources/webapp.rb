@@ -8,6 +8,7 @@ attribute :control_port, :kind_of => Integer
 attribute :secure, :kind_of => String
 attribute :scheme, :kind_of => String
 attribute :proxy_port, :kind_of => Integer
+attribute :proxy_name, :kind_of => String
 attribute :jdk_home, :kind_of => String
 
 attribute :war, :kind_of => String
