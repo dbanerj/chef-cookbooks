@@ -55,8 +55,7 @@ action :create do
       :secure => new_resource.secure,
       :scheme => new_resource.scheme,
       :proxy_port => new_resource.proxy_port,
-      :proxy_name => new_resource.proxy_name,
-      :jmx_port => new_resource.jmx_port
+      :proxy_name => new_resource.proxy_name
     })
   end
 
@@ -75,7 +74,8 @@ action :create do
       :java_opts => new_resource.java_opts,
       :java_opts_test => new_resource.java_opts_test,
       :java_opts_acc => new_resource.java_opts_acc,
-      :java_opts_prod => new_resource.java_opts_prod
+      :java_opts_prod => new_resource.java_opts_prod,
+      :jmx_port => new_resource.jmx_port
     })
   end
 
