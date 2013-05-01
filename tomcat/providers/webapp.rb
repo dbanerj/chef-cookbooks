@@ -55,7 +55,8 @@ action :create do
       :secure => new_resource.secure,
       :scheme => new_resource.scheme,
       :proxy_port => new_resource.proxy_port,
-      :proxy_name => new_resource.proxy_name
+      :proxy_name => new_resource.proxy_name,
+      :jmx_port => new_resource.jmx_port
     })
   end
 

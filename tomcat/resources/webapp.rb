@@ -10,6 +10,7 @@ attribute :scheme, :kind_of => String
 attribute :proxy_port, :kind_of => Integer
 attribute :proxy_name, :kind_of => String
 attribute :jdk_home, :kind_of => String
+attribute :jmx_port, :kind_of => Integer, :default => 3333
 
 attribute :war, :kind_of => String
 

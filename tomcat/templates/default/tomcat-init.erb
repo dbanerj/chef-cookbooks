@@ -127,7 +127,7 @@ fi
 CATALINA_PID="/var/run/$NAME.pid"
 CATALINA_SH="$CATALINA_HOME/bin/catalina.sh"
 
-MONITORING_OPTS="-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=3333"
+MONITORING_OPTS="-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=<%= @jmx_port %>"
 
 # Look for Java Secure Sockets Extension (JSSE) JARs
 if [ -z "${JSSE_HOME}" -a -r "${JAVA_HOME}/jre/lib/jsse.jar" ]; then
